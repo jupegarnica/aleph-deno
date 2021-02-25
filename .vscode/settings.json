@@ -1,0 +1,22 @@
+{
+    "deno.enable": true,
+    "deno.unstable": true,
+    "deno.import_map": "./import_map.json",
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#4a0642",
+        "activityBar.activeBorder": "#69760a",
+        "activityBar.background": "#4a0642",
+        "activityBar.foreground": "#e7e7e7",
+        "activityBar.inactiveForeground": "#e7e7e799",
+        "activityBarBadge.background": "#69760a",
+        "activityBarBadge.foreground": "#e7e7e7",
+        "statusBar.background": "#1b0218",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#4a0642",
+        "titleBar.activeBackground": "#1b0218",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#1b021899",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "peacock.color": "#1b0218"
+}

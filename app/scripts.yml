@@ -1,0 +1,4 @@
+scripts:
+  dev: aleph dev     # start the app in `development` mode
+  start: aleph start   # start the app in `production` mode
+  build: aleph build
