@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: github context
-        run: echo ${{ toJSON(github) }}
+        run: echo ${{ toJSON(github) }} && exit 1
 
       - uses: actions/checkout@v2
 
