@@ -1,8 +1,4 @@
-FROM hayd/alpine-deno:1.7.2
-
-RUN deno install -A -f -n aleph https://deno.land/x/aleph@v0.3.0-alpha.8/cli.ts
-RUN aleph -v
-
+FROM docker.pkg.github.com/jupegarnica/aleph-deno/aleph-base:latest
 
 
 WORKDIR /app
