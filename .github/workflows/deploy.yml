@@ -1,0 +1,29 @@
+name: Deploy
+
+on:
+  registry_package:
+    types: [published]
+
+
+env:
+  IMAGE_NAME: aleph-prod
+
+jobs:
+
+  push:
+
+    runs-on: ubuntu-latest
+    # if: github.event_name == 'push'
+
+    steps:
+
+      - uses: actions/checkout@v2
+
+      - name: ls -a via ssh
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: ls -a
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          # passphrase: ${{ secrets.PASSPHRASE }}
+          privateKey: ${{ secrets.SSH_KEY}}
