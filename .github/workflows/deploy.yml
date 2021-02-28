@@ -25,5 +25,5 @@ jobs:
           command: ls -a
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
-          # passphrase: ${{ secrets.PASSPHRASE }}
+          passphrase:
           privateKey: ${{ secrets.SSH_KEY}}
