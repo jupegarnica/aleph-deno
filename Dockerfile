@@ -6,7 +6,7 @@ WORKDIR /app
 ADD ./app .
 
 # RUN deno cache https://deno.land/x/aleph@v0.3.0-alpha.8/cli/dev.ts
-RUN deno cache https://deno.land/x/aleph@v0.3.0-alpha.8/cli/start.ts
+# RUN deno cache https://deno.land/x/aleph@v0.3.0-alpha.8/cli/start.ts
 # RUN deno cache https://esm.sh/react@17.0.1
 # RUN deno cache https://deno.land/x/aleph@v0.3.0-alpha.8/deps.ts
 # RUN deno cache https://deno.land/std@0.88.0/http/file_server.ts
