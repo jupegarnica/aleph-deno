@@ -3,8 +3,8 @@ name: Docker
 on:
   push:
     # Publish `master` as Docker `latest` image.
-    branches:
-      - master
+    # branches:
+    #   - master
 
     # Publish `v1.2.3` tags as releases.
     tags:
@@ -57,6 +57,16 @@ jobs:
 
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
+          echo $IMAGE_ID:$VERSION > latestBuild
 
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
+      - name: push latestBuild
+        uses: github-actions-x/commit@v2.7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          push-branch: 'master'
+          commit-message: 'latestBuild'
+          force-add: 'false'
+          files: latestBuild
+          name:  monitor
