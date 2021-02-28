@@ -2,8 +2,7 @@ name: Deploy
 
 on:
   registry_package:
-    types: [published]
-
+    types: [published, updated]
 
 env:
   IMAGE_NAME: aleph-prod
