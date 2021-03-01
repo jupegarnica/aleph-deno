@@ -22,15 +22,14 @@ jobs:
       - id: latestBuild
         name: set last build env
         run: |
+          IMAGE_ID=`cat imageId`
+          echo $IMAGE_ID
           LATEST_BUILD=`cat latestBuild`
           echo $LATEST_BUILD
-          echo "::set-output name=latestBuild::$LATEST_BUILD"
-      - id: latestBuildSucceed
-        name: set last build env
-        run: |
+          echo "::set-output name=latestBuild::$IMAGE_ID:$LATEST_BUILD"
           LATEST_BUILD_SUCCEED=`cat latestBuildSucceed`
           echo $LATEST_BUILD_SUCCEED
-          echo "::set-output name=latestBuildSucceed::$LATEST_BUILD_SUCCEED"
+          echo "::set-output name=latestBuildSucceed::$IMAGE_ID:$LATEST_BUILD_SUCCEED"
 
   deploy:
     runs-on: ubuntu-latest
