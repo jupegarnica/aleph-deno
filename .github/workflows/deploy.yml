@@ -15,7 +15,7 @@ jobs:
 
     runs-on: ubuntu-latest
     outputs:
-      LAST_BUILD: ${{ steps.lastBuild.outputs.lastBuild }}
+      LAST_BUILD: ${{ steps.lastBuild.outputs.LAST_BUILD }}
     steps:
 
       - uses: actions/checkout@v2
