@@ -14,22 +14,25 @@ jobs:
 
     runs-on: ubuntu-latest
     outputs:
-      LATEST_BUILD: ${{ steps.latestBuild.outputs.latestBuild }}
-      LATEST_BUILD_SUCCEED: ${{ steps.latestBuildSucceed.outputs.latestBuildSucceed }}
+      LATEST_BUILD: ${{ steps.setVersion.outputs.latestBuild }}
+      LATEST_BUILD_SUCCEED: ${{ steps.setVersion.outputs.latestBuildSucceed }}
+      IMAGE_ID: ${{ steps.setVersion.outputs.imageId }}
     steps:
 
       - uses: actions/checkout@v2
-      - id: latestBuild
-        name: set last build env
+      - id: setVersion
         run: |
           IMAGE_ID=`cat imageId`
           echo $IMAGE_ID
+          echo "::set-output name=imageId::$IMAGE_ID"
+
           LATEST_BUILD=`cat latestBuild`
           echo $LATEST_BUILD
-          echo "::set-output name=latestBuild::$IMAGE_ID:$LATEST_BUILD"
+          echo "::set-output name=latestBuild::$LATEST_BUILD"
+
           LATEST_BUILD_SUCCEED=`cat latestBuildSucceed`
           echo $LATEST_BUILD_SUCCEED
-          echo "::set-output name=latestBuildSucceed::$IMAGE_ID:$LATEST_BUILD_SUCCEED"
+          echo "::set-output name=latestBuildSucceed::$LATEST_BUILD_SUCCEED"
 
   deploy:
     runs-on: ubuntu-latest
@@ -38,15 +41,16 @@ jobs:
     steps:
       - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD}}
       - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD_SUCCEED}}
+      - run: echo ${{needs.getLatestBuild.outputs.IMAGE_ID}}
 
       - name: ssh to server
         uses: garygrossgarten/github-action-ssh@release
         with:
           command: |
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
-            docker pull ${{needs.getLatestBuild.outputs.LATEST_BUILD}}
-            docker stop aleph-prod
-            docker run -d -it -p 80:8080 --name aleph-prod --restart=always ${{needs.getLatestBuild.outputs.LATEST_BUILD}}
+            docker pull ${{needs.getLatestBuild.outputs.IMAGE_ID}}:${{needs.getLatestBuild.outputs.LATEST_BUILD}}
+            docker stop aleph-prod-aleph-prod-${{needs.getLatestBuild.outputs.$LATEST_BUILD_SUCCEED}}
+            docker run -d -it -p 80:8080 --name aleph-prod-${{needs.getLatestBuild.outputs.LATEST_BUILD}} --restart=always ${{needs.getLatestBuild.outputs.IMAGE_ID}}:${{needs.getLatestBuild.outputs.LATEST_BUILD}} || exit 1
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASS }}
