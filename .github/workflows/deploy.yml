@@ -2,17 +2,18 @@ name: Deploy
 
 on:
   workflow_dispatch:
-  registry_package:
+  workflow_run:
+    workflows: ["Docker publish"]
+    branches: [master]
+    types:
+      - completed
 
-env:
-  IMAGE_NAME: aleph-prod
 
 jobs:
 
   push:
 
     runs-on: ubuntu-latest
-    # if: github.event_name == 'push'
 
     steps:
 
