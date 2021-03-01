@@ -60,7 +60,7 @@ jobs:
           # privateKey: ${{ secrets.SSH_KEY}}
   rollback:
     runs-on: ubuntu-latest
-    needs: [deploy]
+    needs: [deploy,getLatestBuild]
     # continue-on-error: false
 
     if: always() && needs.deploy.result == 'failure'
