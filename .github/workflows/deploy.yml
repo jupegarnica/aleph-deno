@@ -52,7 +52,7 @@ jobs:
           # privateKey: ${{ secrets.SSH_KEY}}
   saveLatestBuildSucceed:
     runs-on: ubuntu-latest
-    needs: deploy
+    needs: [deploy,getLatestBuild]
     steps:
       - uses: actions/checkout@v2
       - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD_SUCCEED}}
