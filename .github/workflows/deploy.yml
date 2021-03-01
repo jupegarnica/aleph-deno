@@ -8,31 +8,33 @@ on:
     types:
       - completed
       # - requested
-
+env:
+  LAST_BUILD:
 jobs:
 
   setLastBuild:
 
     runs-on: ubuntu-latest
-    outputs:
-      LAST_BUILD: ${{ steps.lastBuild.outputs.txt }}
+
     steps:
 
       - uses: actions/checkout@v2
       - id: lastBuild
         name: set last build env
-        run: echo "::set-output name=txt::hello"
+        run: |
+          LAST_BUILD='cat lastBuild'
+          echo "::set-env name=LAST_BUILD::$LAST_BUILD"
 
   deploy:
-    needs: setLastBuild
     runs-on: ubuntu-latest
+    needs: setLastBuild
     steps:
-      - run: echo ${{needs.deploy.outputs.LAST_BUILD}}
+      - run: echo ${{env.LAST_BUILD}}
 
     # - name: ls -a via ssh
       #   uses: garygrossgarten/github-action-ssh@release
       #   with:
-      #     command: echo ${{needs.deploy.outputs.LAST_BUILD}}
+      #     command: echo ${{needs.setLastBuild.outputs.LAST_BUILD}}
       #     host: ${{ secrets.SSH_HOST }}
       #     username: ${{ secrets.SSH_USER }}
       #     password: ${{ secrets.SSH_PASS }}
