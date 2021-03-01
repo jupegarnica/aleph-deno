@@ -44,6 +44,7 @@ jobs:
       - id: deploySsh
         name: ssh to server
         uses: garygrossgarten/github-action-ssh@release
+        continue-on-error: true
         with:
           command: |
             exit 1
