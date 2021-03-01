@@ -44,8 +44,11 @@ jobs:
         uses: garygrossgarten/github-action-ssh@release
         with:
           command: |
-            echo ${{needs.getLatestBuild.outputs.LATEST_BUILD}}
-            echo ${{needs.getLatestBuild.outputs.LATEST_BUILD_SUCCEED}}
+            ${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+            docker pull ${{needs.getLatestBuild.outputs.LATEST_BUILD}}
+            docker stop aleph-prod
+            docker run -d -it -p 80:8080 --name aleph-prod --restart=always ${{needs.getLatestBuild.outputs.LATEST_BUILD}}
+
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASS }}
