@@ -15,22 +15,23 @@ jobs:
   setLatestBuild:
 
     runs-on: ubuntu-latest
-
+    outputs:
+      LATEST_BUILD: ${{ steps.latestBuild.outputs.latestBuild }}
     steps:
 
       - uses: actions/checkout@v2
       - id: latestBuild
         name: set last build env
         run: |
-          LAST_BUILD=`cat latestBuild`
-          echo $LAST_BUILD
-          echo "::set-env name=LAST_BUILD::$LAST_BUILD"
+          LATEST_BUILD=`cat latestBuild`
+          echo $LATEST_BUILD
+          echo "::set-output name=latestBuild::$LATEST_BUILD"
 
   deploy:
     runs-on: ubuntu-latest
     needs: setLatestBuild
     steps:
-      - run: echo ${{env.LAST_BUILD}}
+      - run: echo ${{needs.setLatestBuild.outputs.LATEST_BUILD}}
 
     # - name: ls -a via ssh
       #   uses: garygrossgarten/github-action-ssh@release
