@@ -55,4 +55,4 @@ jobs:
           commit-message: 'add latest build version'
           force-add: 'true'
           files: latestBuild
-          name:  monitor
+          name:  publish-job

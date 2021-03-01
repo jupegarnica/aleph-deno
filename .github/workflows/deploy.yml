@@ -12,11 +12,12 @@ env:
   LAST_BUILD:
 jobs:
 
-  setLatestBuild:
+  getLatestBuild:
 
     runs-on: ubuntu-latest
     outputs:
       LATEST_BUILD: ${{ steps.latestBuild.outputs.latestBuild }}
+      LATEST_BUILD_SUCCEED: ${{ steps.latestBuild.outputs.latestBuildSucceed }}
     steps:
 
       - uses: actions/checkout@v2
@@ -26,18 +27,42 @@ jobs:
           LATEST_BUILD=`cat latestBuild`
           echo $LATEST_BUILD
           echo "::set-output name=latestBuild::$LATEST_BUILD"
+      - id: latestBuildSucceed
+        name: set last build env
+        run: |
+          LATEST_BUILD_SUCCEED=`cat latestBuildSucceed`
+          echo $LATEST_BUILD_SUCCEED
+          echo "::set-output name=latestBuildSucceed::LATEST_BUILD_SUCCEED"
 
   deploy:
     runs-on: ubuntu-latest
-    needs: setLatestBuild
+    needs: getLatestBuild
     steps:
-      - run: echo ${{needs.setLatestBuild.outputs.LATEST_BUILD}}
+      - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD}}
+      - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD_SUCCEED}}
 
-    # - name: ls -a via ssh
-      #   uses: garygrossgarten/github-action-ssh@release
-      #   with:
-      #     command: echo ${{needs.setLatestBuild.outputs.LAST_BUILD}}
-      #     host: ${{ secrets.SSH_HOST }}
-      #     username: ${{ secrets.SSH_USER }}
-      #     password: ${{ secrets.SSH_PASS }}
-      #     # privateKey: ${{ secrets.SSH_KEY}}
+    - name: ls -a via ssh
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: |
+            echo ${{needs.getLatestBuild.outputs.LAST_BUILD}}
+            echo ${{needs.getLatestBuild.outputs.LATEST_BUILD_SUCCEED}}
+            failing!
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASS }}
+          # privateKey: ${{ secrets.SSH_KEY}}
+  saveLatestBuildSucceed:
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD}} > latestBuildSucceed
+      - name: push latestBuildSucceed
+        uses: github-actions-x/commit@v2.7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          push-branch: 'master'
+          commit-message: 'add latest build version'
+          force-add: 'true'
+          files: latestBuildSucceed
+          name:  deploy-job
