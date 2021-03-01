@@ -54,6 +54,7 @@ jobs:
     needs: deploy
     steps:
       - uses: actions/checkout@v2
+      - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD}}
       - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD}} > latestBuildSucceed
       - name: push latestBuildSucceed
         uses: github-actions-x/commit@v2.7
