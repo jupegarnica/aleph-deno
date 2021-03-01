@@ -49,7 +49,8 @@ jobs:
           command: |
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
             docker pull ${{needs.getLatestBuild.outputs.IMAGE_ID}}:${{needs.getLatestBuild.outputs.LATEST_BUILD}}
-            docker stop aleph-prod-aleph-prod-${{needs.getLatestBuild.outputs.LATEST_BUILD_SUCCEED}}
+            docker stop aleph-prod-aleph-prod-${{needs.getLatestBuild.outputs.LATEST_BUILD_SUCCEED}} || \
+            docker stop $(docker ps -a -q)
             docker run -d -it -p 80:8080 --name aleph-prod-${{needs.getLatestBuild.outputs.LATEST_BUILD}} --restart=always ${{needs.getLatestBuild.outputs.IMAGE_ID}}:${{needs.getLatestBuild.outputs.LATEST_BUILD}} || exit 1
 
           host: ${{ secrets.SSH_HOST }}
