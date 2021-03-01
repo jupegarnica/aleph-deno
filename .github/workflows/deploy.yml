@@ -3,8 +3,8 @@ name: Deploy
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["Docker publish"]
-    branches: [master]
+    workflows: ["build and publish"]
+    # branches: [master]
     types:
       - completed
       - requested
