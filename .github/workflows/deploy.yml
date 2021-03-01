@@ -8,8 +8,6 @@ on:
     types:
       - completed
       # - requested
-env:
-  LAST_BUILD:
 jobs:
 
   getLatestBuild:
@@ -17,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       LATEST_BUILD: ${{ steps.latestBuild.outputs.latestBuild }}
-      LATEST_BUILD_SUCCEED: ${{ steps.latestBuild.outputs.latestBuildSucceed }}
+      LATEST_BUILD_SUCCEED: ${{ steps.latestBuildSucceed.outputs.latestBuildSucceed }}
     steps:
 
       - uses: actions/checkout@v2
@@ -32,7 +30,7 @@ jobs:
         run: |
           LATEST_BUILD_SUCCEED=`cat latestBuildSucceed`
           echo $LATEST_BUILD_SUCCEED
-          echo "::set-output name=latestBuildSucceed::LATEST_BUILD_SUCCEED"
+          echo "::set-output name=latestBuildSucceed::$LATEST_BUILD_SUCCEED"
 
   deploy:
     runs-on: ubuntu-latest
@@ -41,7 +39,7 @@ jobs:
       - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD}}
       - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD_SUCCEED}}
 
-      - name: ls -a via ssh
+      - name: ssh to server
         uses: garygrossgarten/github-action-ssh@release
         with:
           command: |
