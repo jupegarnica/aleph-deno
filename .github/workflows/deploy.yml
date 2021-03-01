@@ -11,7 +11,7 @@ on:
 
 jobs:
 
-  deploy:
+  setLastBuild:
 
     runs-on: ubuntu-latest
     outputs:
@@ -22,8 +22,14 @@ jobs:
       - id: lastBuild
         name: set last build env
         run: echo "::set-output name=txt::hello"
+
+  deploy:
+    needs: setLastBuild
+    runs-on: ubuntu-latest
+    steps:
       - run: echo ${{needs.deploy.outputs.LAST_BUILD}}
-      # - name: ls -a via ssh
+
+    # - name: ls -a via ssh
       #   uses: garygrossgarten/github-action-ssh@release
       #   with:
       #     command: echo ${{needs.deploy.outputs.LAST_BUILD}}
