@@ -43,7 +43,7 @@ jobs:
         uses: garygrossgarten/github-action-ssh@release
         with:
           command: |
-            echo ${{needs.getLatestBuild.outputs.LAST_BUILD}}
+            echo ${{needs.getLatestBuild.outputs.LATEST_BUILD}}
             echo ${{needs.getLatestBuild.outputs.LATEST_BUILD_SUCCEED}}
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
