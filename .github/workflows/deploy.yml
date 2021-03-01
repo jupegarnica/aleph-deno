@@ -41,7 +41,7 @@ jobs:
       - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD}}
       - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD_SUCCEED}}
 
-    - name: ls -a via ssh
+      - name: ls -a via ssh
         uses: garygrossgarten/github-action-ssh@release
         with:
           command: |
