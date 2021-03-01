@@ -44,7 +44,7 @@ jobs:
 
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
-          echo $IMAGE_ID:$VERSION > latestBuild
+          echo $VERSION > latestBuild
           echo $IMAGE_ID > imageId
 
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
