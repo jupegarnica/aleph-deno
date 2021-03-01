@@ -52,7 +52,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           push-branch: 'master'
-          commit-message: 'add latest build version'
+          commit-message: 'add latestBuild'
           force-add: 'true'
           files: latestBuild
           name:  publish-job
