@@ -3,7 +3,6 @@ name: Deploy
 on:
   workflow_dispatch:
   registry_package:
-    types: [published, updated]
 
 env:
   IMAGE_NAME: aleph-prod
