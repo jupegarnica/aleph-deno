@@ -11,18 +11,21 @@ on:
 
 jobs:
 
-  push:
+  deploy:
 
     runs-on: ubuntu-latest
-
+    outputs:
+      LAST_BUILD: ${{ steps.lastBuild.outputs.lastBuild }}
     steps:
 
       - uses: actions/checkout@v2
-
+      - id: lastBuild
+        name: set last build env
+        run: echo "::set-output name=lastBuild::hello"
       - name: ls -a via ssh
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: ls -a
+          command: echo ${{needs.deploy.outputs.LAST_BUILD}}
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASS }}
