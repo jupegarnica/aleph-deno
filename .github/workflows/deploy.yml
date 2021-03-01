@@ -22,7 +22,8 @@ jobs:
       - id: lastBuild
         name: set last build env
         run: |
-          LAST_BUILD='cat lastBuild'
+          LAST_BUILD=`cat lastBuild`
+          echo $LAST_BUILD
           echo "::set-env name=LAST_BUILD::$LAST_BUILD"
 
   deploy:
