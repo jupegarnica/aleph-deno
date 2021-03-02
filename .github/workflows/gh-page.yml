@@ -19,7 +19,7 @@ jobs:
     #   volumes:
     #     - ./:/app
     steps:
-      - run: cwd
+      - run: pwd
       # - name: push docs
       #   uses: github-actions-x/commit@v2.7
       #   with:
