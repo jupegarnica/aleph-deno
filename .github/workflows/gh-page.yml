@@ -1,0 +1,30 @@
+name: gh-page
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - v*
+
+jobs:
+  build:
+    container:
+      image: docker.pkg.github.com/jupegarnica/aleph-deno/aleph-base:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+      # ports:
+      #   - 80
+      volumes:
+        - ./:/app
+    steps:
+      - run: cwd
+      - name: push docs
+        uses: github-actions-x/commit@v2.7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          push-branch: 'master'
+          commit-message: 'update docs'
+          force-add: 'true'
+          files: docs/*
+          name:  gh-pages
