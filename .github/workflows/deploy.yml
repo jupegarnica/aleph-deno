@@ -47,7 +47,6 @@ jobs:
         # continue-on-error: true
         with:
           command: |
-            exit 1
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
             docker pull ${{needs.getLatestBuild.outputs.IMAGE_ID}}:${{needs.getLatestBuild.outputs.LATEST_BUILD}}
             docker stop aleph-prod-${{needs.getLatestBuild.outputs.LATEST_BUILD_SUCCEED}} || \
