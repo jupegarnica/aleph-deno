@@ -10,7 +10,7 @@ env:
   IMAGE_NAME: aleph-prod
 
 jobs:
-  push:
+  publish:
 
     runs-on: ubuntu-latest
     # if: github.event_name == 'push'
