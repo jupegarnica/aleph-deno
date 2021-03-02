@@ -4,10 +4,8 @@ on:
   workflow_dispatch:
   workflow_run:
     workflows: ["build and publish"]
-    # branches: [master]
     types:
       - completed
-      # - requested
 jobs:
 
   getLatestBuild:
@@ -37,14 +35,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: getLatestBuild
-    # continue-on-error: true
 
     if: needs.getLatestBuild.outputs.LATEST_BUILD != needs.getLatestBuild.outputs.LATEST_BUILD_SUCCEED
     steps:
       - id: deploySsh
         name: ssh to server
         uses: garygrossgarten/github-action-ssh@release
-        # continue-on-error: true
         with:
           command: |
             DOCKER_IMAGE=${{needs.getLatestBuild.outputs.IMAGE_ID}}:${{needs.getLatestBuild.outputs.LATEST_BUILD}}
@@ -65,8 +61,6 @@ jobs:
     if: needs.deploy.result == 'success'
     steps:
       - uses: actions/checkout@v2
-      # - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD_SUCCEED}}
-      # - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD}}
       - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD}} > latestBuildSucceed
       - name: push latestBuildSucceed
         uses: github-actions-x/commit@v2.7
