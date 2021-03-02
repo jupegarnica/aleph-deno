@@ -22,7 +22,8 @@ jobs:
       - uses: actions/checkout@v2
       - run: ls
       - run: aleph build app
-      - run: cd /app && rm -rf docs || exit 0
+      - run: pwd
+      - run: rm -rf docs || exit 0
       - run: mkdir docs
       - run: cp -r ./app/dist/* docs
       - name: push docs
