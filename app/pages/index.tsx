@@ -1,10 +1,12 @@
-import React, {useRef} from 'react';
+import React, { useRef } from 'react';
+import Typist from 'https://esm.sh/react-typist';
 
 export default function Home() {
-  const ref= useRef();
   return (
-    <div className='page' ref={ref}>
-      hola
+    <div className='page'>
+      <Typist>
+        Animate this text.
+      </Typist>
     </div>
   );
 }
