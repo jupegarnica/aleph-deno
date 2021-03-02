@@ -1,0 +1,1 @@
+(()=>{var e,a=(e=__ALEPH.pack["https://esm.sh/react@17.0.1"].default,{default:function(){return e.createElement("div",{className:"page"},e.createElement("h1",null,"adios mundo cruel"))}});__ALEPH.pack["/pages/index.tsx"]=a})();
