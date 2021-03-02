@@ -1,3 +1,3 @@
 #!/usr/bin/sh
-cd app
+cd ../app
 aleph dev
