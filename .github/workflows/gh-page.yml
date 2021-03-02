@@ -20,12 +20,12 @@ jobs:
         - ./:/app
     steps:
       - run: cwd
-      - name: push docs
-        uses: github-actions-x/commit@v2.7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          push-branch: 'master'
-          commit-message: 'update docs'
-          force-add: 'true'
-          files: docs/*
-          name:  gh-pages
+      # - name: push docs
+      #   uses: github-actions-x/commit@v2.7
+      #   with:
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     push-branch: 'master'
+      #     commit-message: 'update docs'
+      #     force-add: 'true'
+      #     files: docs/*
+      #     name:  gh-pages
