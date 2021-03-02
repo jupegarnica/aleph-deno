@@ -8,6 +8,7 @@ on:
 
 jobs:
   build:
+    runs-on: ubuntu-latest
     container:
       image: docker.pkg.github.com/jupegarnica/aleph-deno/aleph-base:latest
       credentials:
