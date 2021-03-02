@@ -25,8 +25,8 @@ jobs:
       - run: rm -rf docs || exit 0
       - run: mkdir docs
       - run: cp -r ./app/dist/* docs
-      - name: push docs
       - run: ls -al
+      - name: push docs
         uses: github-actions-x/commit@v2.7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
