@@ -20,13 +20,13 @@ jobs:
         - /home/runner/work/aleph-deno/aleph-deno/:/app
     steps:
       - uses: actions/checkout@v2
-      - run: ls
       - run: aleph build app
       - run: pwd
       - run: rm -rf docs || exit 0
       - run: mkdir docs
       - run: cp -r ./app/dist/* docs
       - name: push docs
+      - run: ls -al
         uses: github-actions-x/commit@v2.7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
