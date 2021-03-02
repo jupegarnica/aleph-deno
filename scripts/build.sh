@@ -1,2 +1,3 @@
 #!/usr/bin/sh
-docker build -t aleph-prod ..
+DIR=$(dirname $(realpath "$0"))
+docker build -t aleph-prod $DIR/..
