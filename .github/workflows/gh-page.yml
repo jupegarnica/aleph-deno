@@ -9,23 +9,27 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # container:
-    #   image: docker.pkg.github.com/jupegarnica/aleph-deno/aleph-base:latest
-    #   credentials:
-    #     username: ${{ github.actor }}
-    #     password: ${{ secrets.GITHUB_TOKEN }}
-    #   # ports:
-    #   #   - 80
-    #   volumes:
-    #     - ./:/app
+    container:
+      image: docker.pkg.github.com/jupegarnica/aleph-deno/aleph-base:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+      # ports:
+      #   - 8080
+      volumes:
+        - /home/runner/work/aleph-deno/aleph-deno/:/app
     steps:
       - run: pwd
-      # - name: push docs
-      #   uses: github-actions-x/commit@v2.7
-      #   with:
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
-      #     push-branch: 'master'
-      #     commit-message: 'update docs'
-      #     force-add: 'true'
-      #     files: docs/*
-      #     name:  gh-pages
+      - run: aleph build
+      - run: rm -rf docs || exit 0
+      - run: mkdir docs
+      - run: cp -r ./app/dist/* docs
+      - name: push docs
+        uses: github-actions-x/commit@v2.7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          push-branch: 'master'
+          commit-message: 'update docs'
+          force-add: 'true'
+          files: docs/*
+          name:  gh-pages
