@@ -19,6 +19,7 @@ jobs:
       volumes:
         - /home/runner/work/aleph-deno/aleph-deno/:/app
     steps:
+      - run: apt install -y git
       - uses: actions/checkout@v2
       - run: aleph build app
       - run: pwd
