@@ -47,6 +47,7 @@ jobs:
         # continue-on-error: true
         with:
           command: |
+            exit 1
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
             docker pull ${{needs.getLatestBuild.outputs.IMAGE_ID}}:${{needs.getLatestBuild.outputs.LATEST_BUILD}}
             docker stop aleph-prod-${{needs.getLatestBuild.outputs.LATEST_BUILD_SUCCEED}} || \
@@ -57,6 +58,25 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASS }}
           # privateKey: ${{ secrets.SSH_KEY}}
+
+  saveLatestBuildSucceed:
+    runs-on: ubuntu-latest
+    needs: [deploy,getLatestBuild]
+    if: needs.deploy.result == 'success'
+    steps:
+      - uses: actions/checkout@v2
+      # - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD_SUCCEED}}
+      # - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD}}
+      - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD}} > latestBuildSucceed
+      - name: push latestBuildSucceed
+        uses: github-actions-x/commit@v2.7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          push-branch: 'master'
+          commit-message: 'add latestBuildSucceed'
+          force-add: 'true'
+          files: latestBuildSucceed
+          name:  deploy-job
   rollback:
     runs-on: ubuntu-latest
     needs: [deploy,getLatestBuild]
@@ -79,22 +99,3 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASS }}
           # privateKey: ${{ secrets.SSH_KEY}}
-
-  saveLatestBuildSucceed:
-    runs-on: ubuntu-latest
-    needs: [deploy,getLatestBuild]
-    if: always() && needs.deploy.result == 'success'
-    steps:
-      - uses: actions/checkout@v2
-      # - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD_SUCCEED}}
-      # - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD}}
-      - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD}} > latestBuildSucceed
-      - name: push latestBuildSucceed
-        uses: github-actions-x/commit@v2.7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          push-branch: 'master'
-          commit-message: 'add latestBuildSucceed'
-          force-add: 'true'
-          files: latestBuildSucceed
-          name:  deploy-job
