@@ -5,7 +5,9 @@ export default function App({ Page, pageProps }: { Page: ComponentType<any>, pag
   return (
     <main>
       <head>
-        <title>Hello World - Aleph.js</title>
+        <link rel="shortcut icon" type="image/svg" href="/favicon.svg"/>
+
+        <title>Jupegarnica</title>
       </head>
       <Page {...pageProps} />
     </main>

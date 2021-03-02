@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {useRef} from 'react';
 
 export default function Home() {
-
+  const ref= useRef();
   return (
-    <div className="page">
-      <h1>adios mundo cruel</h1>
+    <div className='page' ref={ref}>
+      hola
     </div>
-  )
+  );
 }
