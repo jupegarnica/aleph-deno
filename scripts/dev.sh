@@ -1,3 +1,5 @@
 #!/usr/bin/sh
-cd ../app
+DIR=$(dirname $(realpath "$0"))
+
+cd $DIR/../app
 aleph dev
