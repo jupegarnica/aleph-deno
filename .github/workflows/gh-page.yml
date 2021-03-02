@@ -9,15 +9,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: docker.pkg.github.com/jupegarnica/aleph-deno/aleph-base:latest
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-      # ports:
-      #   - 80
-      volumes:
-        - ./:/app
+    # container:
+    #   image: docker.pkg.github.com/jupegarnica/aleph-deno/aleph-base:latest
+    #   credentials:
+    #     username: ${{ github.actor }}
+    #     password: ${{ secrets.GITHUB_TOKEN }}
+    #   # ports:
+    #   #   - 80
+    #   volumes:
+    #     - ./:/app
     steps:
       - run: cwd
       # - name: push docs
