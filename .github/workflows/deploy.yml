@@ -39,7 +39,7 @@ jobs:
     needs: getLatestBuild
     # continue-on-error: true
 
-    # if: needs.getLatestBuild.outputs.LATEST_BUILD != ''
+    if: needs.getLatestBuild.outputs.LATEST_BUILD != needs.getLatestBuild.outputs.LATEST_BUILD_SUCCEED
     steps:
       - id: deploySsh
         name: ssh to server
