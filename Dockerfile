@@ -5,7 +5,6 @@ WORKDIR /app
 
 ADD ./app .
 
-# TODO remove this
 # RUN deno cache https://deno.land/x/aleph@v0.3.0-alpha.8/cli/dev.ts
 # RUN deno cache https://deno.land/x/aleph@v0.3.0-alpha.8/cli/start.ts
 # RUN deno cache https://esm.sh/react@17.0.1
