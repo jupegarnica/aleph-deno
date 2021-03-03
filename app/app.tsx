@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react'
 import React from 'react'
-
+// TODO this works?
 export default function App({ Page, pageProps }: { Page: ComponentType<any>, pageProps: any }) {
   return (
     <main>
