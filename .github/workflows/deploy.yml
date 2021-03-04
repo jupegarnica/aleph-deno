@@ -20,11 +20,11 @@ jobs:
       - uses: actions/checkout@v2
       - id: setVersion
         run: |
-          IMAGE_ID=`cat imageId`
+          IMAGE_ID=`cat metadata/imageId`
           echo $IMAGE_ID
           echo "::set-output name=imageId::$IMAGE_ID"
 
-          LATEST_BUILD=`cat latestBuild`
+          LATEST_BUILD=`cat metadata/latestBuild`
           echo $LATEST_BUILD
           echo "::set-output name=latestBuild::$LATEST_BUILD"
 
@@ -61,7 +61,7 @@ jobs:
     if: needs.deploy.result == 'success'
     steps:
       - uses: actions/checkout@v2
-      - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD}} > latestBuildSucceed
+      - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD}} > metadata/latestBuildSucceed
       - name: push latestBuildSucceed
         uses: github-actions-x/commit@v2.7
         with:
@@ -69,7 +69,7 @@ jobs:
           push-branch: 'master'
           commit-message: 'add latestBuildSucceed'
           force-add: 'true'
-          files: latestBuildSucceed
+          files: metadata/*
           name:  deploy-job
   rollback:
     runs-on: ubuntu-latest

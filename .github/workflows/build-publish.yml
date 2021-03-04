@@ -46,8 +46,8 @@ jobs:
 
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
-          echo $VERSION > latestBuild
-          echo $IMAGE_ID > imageId
+          echo $VERSION > metadata/latestBuild
+          echo $IMAGE_ID > metadata/imageId
 
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
@@ -58,5 +58,5 @@ jobs:
           push-branch: 'master'
           commit-message: 'add latestBuild'
           force-add: 'true'
-          files: latestBuild imageId
+          files: metadata/*
           name:  publish-job
