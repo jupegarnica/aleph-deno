@@ -35,3 +35,4 @@ jobs:
           force-add: 'true'
           files: docs/*
           name:  gh-pages
+          rebase: 'true'

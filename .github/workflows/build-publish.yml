@@ -60,3 +60,4 @@ jobs:
           force-add: 'true'
           files: metadata/*
           name:  publish-job
+          rebase: 'true'

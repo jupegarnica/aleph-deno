@@ -70,6 +70,7 @@ jobs:
           commit-message: 'add latestBuildSucceed'
           force-add: 'true'
           files: metadata/*
+          rebase: 'true'
           name:  deploy-job
   rollback:
     runs-on: ubuntu-latest
