@@ -28,7 +28,7 @@ jobs:
           echo $LATEST_BUILD
           echo "::set-output name=latestBuild::$LATEST_BUILD"
 
-          LATEST_BUILD_SUCCEED=`cat latestBuildSucceed`
+          LATEST_BUILD_SUCCEED=`cat metadata/latestBuildSucceed`
           echo $LATEST_BUILD_SUCCEED
           echo "::set-output name=latestBuildSucceed::$LATEST_BUILD_SUCCEED"
 
