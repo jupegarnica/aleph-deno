@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react'
 import React from 'react'
-// import './style/index.css';
+import './style/index.css';
 // import { useDeno } from 'aleph/mod.ts';
 
 export default function App({ Page, pageProps }: { Page: ComponentType<any>, pageProps: any }) {
@@ -24,7 +24,7 @@ export default function App({ Page, pageProps }: { Page: ComponentType<any>, pag
         <meta name="app version" content={appVersion}/> */}
 
         <link rel="shortcut icon" type="image/svg" href="favicon.svg"/>
-        <link rel="stylesheet" href="style/index.css" />
+        {/* <link rel="stylesheet" href="style/index.css" /> */}
         <title>GARN</title>
       </head>
       <Page {...pageProps} />
