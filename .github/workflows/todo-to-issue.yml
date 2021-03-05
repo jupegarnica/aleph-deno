@@ -23,7 +23,10 @@
 #           # FILE_PATTERN: ".*cs"
 #         id: "todo"
 name: TODO bot
-on: [push]
+on:
+  push:
+  tags-ignore:
+      - v*
 jobs:
   build:
     runs-on: ubuntu-latest
