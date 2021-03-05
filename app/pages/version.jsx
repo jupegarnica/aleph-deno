@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useDeno } from 'aleph/mod.ts';
-import './version.css';
+// import './version.css';
 export default function Version() {
   const { deno, v8, typescript } = useDeno(() => {
     return Deno.version;
