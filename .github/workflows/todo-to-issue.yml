@@ -25,7 +25,7 @@
 name: TODO bot
 on:
   push:
-  tags-ignore:
+    tags-ignore:
       - v*
 jobs:
   build:
