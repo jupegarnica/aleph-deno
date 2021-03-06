@@ -1,12 +1,17 @@
 import React from 'react';
 import Typist from 'https://esm.sh/react-typist';
 import './index.css';
-import Hand from "../components/hand.tsx";
-
+import Hand from '../components/hand.tsx';
+const getFontSize = () => {
+  const fs=window.getComputedStyle(document.querySelector('.typist'), null).getPropertyValue('font-size');
+  console.log(fs);
+}
 export default function Home() {
   return (
     <div className='page index'>
       <Typist
+        onCharacterTyped={getFontSize}
+        className='typist'
         cursor={{
           show: false,
           // blink: true,
@@ -16,21 +21,23 @@ export default function Home() {
         }}
         avgTypingDelay={60}
       >
-        <div>Hi <Hand/></div>
+        <div>
+          Hi <Hand />
+        </div>
+        {/* <Typist.Backspace count={4} delay={500} /> */}
         <Typist.Delay ms={600} />
 
         <div>I am a code developer</div>
-        {/* <Typist.Backspace count={8} delay={200} /> */}
-        <Typist.Delay ms={200} />
+        <Typist.Delay ms={400} />
 
         <div>a web artist in love with minimalism</div>
-        <Typist.Delay ms={200} />
+        <Typist.Delay ms={400} />
 
         <div>
           My thoughts are on{' '}
           <a href='https://twitter.com/jupegarnica'>twitter</a>
         </div>
-        <Typist.Delay ms={200} />
+        <Typist.Delay ms={400} />
 
         <div>
           And some of my work at{' '}
