@@ -1,9 +1,15 @@
-import type { ComponentType } from 'react'
-import React from 'react'
-import './style/index.css';
+import type { ComponentType } from 'react';
+import React from 'react';
+import './style/main.css';
 // import { useDeno } from 'aleph/mod.ts';
 
-export default function App({ Page, pageProps }: { Page: ComponentType<any>, pageProps: any }) {
+export default function App({
+  Page,
+  pageProps,
+}: {
+  Page: ComponentType<any>;
+  pageProps: any;
+}):any {
   // const {deno,v8,typescript} = useDeno(() => {
 
   //   return Deno.version;
@@ -18,16 +24,24 @@ export default function App({ Page, pageProps }: { Page: ComponentType<any>, pag
   return (
     <main>
       <head>
-        {/* <meta name="deno version" content={deno}/>
-        <meta name="v8 version" content={v8}/>
-        <meta name="typescript version" content={typescript}/>
-        <meta name="app version" content={appVersion}/> */}
+        <link
+          rel='preconnect'
+          href='https://fonts.gstatic.com'
+        />
 
-        <link rel="shortcut icon" type="image/svg" href="favicon.svg"/>
+        <link
+          href='https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;800&display=swap'
+          rel='stylesheet'
+        />
+        <link
+          rel='shortcut icon'
+          type='image/svg'
+          href='favicon.svg'
+        />
         {/* <link rel="stylesheet" href="style/index.css" /> */}
         <title>GARN</title>
       </head>
       <Page {...pageProps} />
     </main>
-  )
+  );
 }
