@@ -24,7 +24,7 @@ export default function App({
   return (
     <main>
       <head>
-        <link
+        {/* <link
           rel='preconnect'
           href='https://fonts.gstatic.com'
         />
@@ -32,7 +32,7 @@ export default function App({
         <link
           href='https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;800&display=swap'
           rel='stylesheet'
-        />
+        /> */}
         <link
           rel='shortcut icon'
           type='image/svg'
