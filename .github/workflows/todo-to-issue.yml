@@ -25,7 +25,6 @@
 name: TODO bot
 on:
   push:
-   # TODO this works?
     branches:
       - '**'
     tags-ignore:
