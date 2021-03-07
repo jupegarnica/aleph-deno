@@ -16,11 +16,9 @@ jobs:
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
-      # ports:
-      #   - 8080
       volumes:
         - /home/runner/work/aleph-deno/aleph-deno/:/app
     steps:
-      - run: echo $GITHUB_WORKSPACE
+      - run: ls -al /app
       - uses: actions/checkout@v2
       - run: sh scripts/test.sh
