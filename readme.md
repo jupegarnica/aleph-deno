@@ -21,6 +21,8 @@ El proyecto se base en la filosofía DevOps. Pero además también se ha aplicad
 - SSG Server side generation
 
 
+## Workflows
+
 Existen 5 Workflows (pipelines):
 
 ### Build and publish
