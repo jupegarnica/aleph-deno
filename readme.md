@@ -46,7 +46,7 @@ Consiste en 4 jobs:
   - Para la imagen que corre actualmente
   - Arranca la nueva imagen.
 - SaveLatestBuildSucceed:  Si el Job anterior acaba sin errores, guarda la version deployada en `metadata/latestBuildSucceed`
-- rollback: Si el Job de deploy falla, este Job arranca la ultima imagen exitosa `metadata/latestBuildSucceed`
+- rollback: Si el Job de deploy falla, este Job arranca la última imagen exitosa `metadata/latestBuildSucceed`
 
 
 ### Test producción
