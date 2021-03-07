@@ -14,6 +14,8 @@ section.index {
   left: 0;
   opacity: 0;
   pointer-events: none;
+  transition: all 2000ms ease;
+
 }
 .typist {
   display: flex;
@@ -28,7 +30,7 @@ section.index {
 }
 .typist div {
   color: var(--text-color);
-  transition: all 1000ms ease-in-out;
+  transition: all 600ms ease-in-out;
 }
 .typist a {
   font-weight: 800;
@@ -55,7 +57,7 @@ section.index {
 
 .animated .typist:hover + .background {
   opacity: 1;
-  transition: all 1000ms ease;
+  transition: all 600ms ease;
 }
 .animated .typist div:hover {
   --text-color: #ddd;
