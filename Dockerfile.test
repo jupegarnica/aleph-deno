@@ -23,10 +23,14 @@ RUN apk add --no-cache \
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
-RUN addgroup -S pptruser && adduser -S -g pptruser pptruser \
-    && mkdir -p /home/pptruser/Downloads /app \
-    && chown -R pptruser:pptruser /home/pptruser \
-    && chown -R pptruser:pptruser /app \
-    && chown -R pptruser:pptruser /deno-dir
 
-USER pptruser
+# RUN mkdir -p /__w && mkdir -p /__w/aleph-deno/ && mkdir -p /__w/aleph-deno/aleph-deno
+# RUN chmod -R 777  /__w/aleph-deno/aleph-deno
+# RUN addgroup -S pptruser && adduser -S -g pptruser pptruser \
+#     && mkdir -p /home/pptruser/Downloads /app \
+#     && chown -R pptruser:pptruser /home/pptruser \
+#     && chown -R pptruser:pptruser /app \
+#     && chown -R pptruser:pptruser /deno-dir \
+#     && chown -R pptruser:pptruser /__w
+
+# USER pptruser
