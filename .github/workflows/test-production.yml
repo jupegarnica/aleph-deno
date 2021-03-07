@@ -1,4 +1,4 @@
-name: Test end2end production
+name: Test production
 
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ on:
       - completed
 jobs:
 
-  getLatestBuild:
+  end2end:
 
     runs-on: ubuntu-latest
     container:

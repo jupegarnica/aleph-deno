@@ -1,7 +1,7 @@
 #!/usr/bin/sh
 DIR=$(dirname $(realpath "$0"))
 
-docker build -t aleph-test -f Dockerfile.base $DIR &&\
+docker build -t aleph-test -f Dockerfile.test $DIR &&\
 
 cat $DIR/../github-token.secret | docker login https://docker.pkg.github.com -u jupegarnica --password-stdin &&\
 

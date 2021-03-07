@@ -5,7 +5,7 @@ WORKDIR /app
 
 
 # EXPOSE 8080
-RUN deno cache https://deno.land/x/puppeteer@5.5.1/mod.ts
+RUN deno cache --unstable https://deno.land/x/puppeteer@5.5.1/mod.ts
 RUN deno cache https://deno.land/std@0.89.0/testing/asserts.ts
 
 RUN PUPPETEER_PRODUCT=chrome deno run -A --unstable https://deno.land/x/puppeteer@5.5.1/install.ts
