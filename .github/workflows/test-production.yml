@@ -16,8 +16,8 @@ jobs:
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
-      volumes:
-        - /home/runner/work/aleph-deno/aleph-deno/:/app
+      # volumes:
+      #   - /home/runner/work/aleph-deno/aleph-deno/:/app
     steps:
       - run: ls -al /app
       - uses: actions/checkout@v2
