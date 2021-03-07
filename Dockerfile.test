@@ -1,11 +1,32 @@
-FROM docker.pkg.github.com/jupegarnica/aleph-deno/aleph-base:latest
-
+# FROM docker.pkg.github.com/jupegarnica/aleph-deno/aleph-base:latest
+FROM hayd/alpine-deno:1.7.2
 
 WORKDIR /app
 
 
 # EXPOSE 8080
-RUN deno cache --unstable https://deno.land/x/puppeteer@5.5.1/mod.ts
+RUN deno cache  --unstable https://deno.land/x/puppeteer@5.5.1/mod.ts
 RUN deno cache https://deno.land/std@0.89.0/testing/asserts.ts
 
 RUN PUPPETEER_PRODUCT=chrome deno run -A --unstable https://deno.land/x/puppeteer@5.5.1/install.ts
+
+# Installs latest Chromium (85) package.
+RUN apk add --no-cache \
+      chromium \
+      nss \
+      freetype \
+      freetype-dev \
+      harfbuzz \
+      ca-certificates \
+      ttf-freefont
+
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+
+RUN addgroup -S pptruser && adduser -S -g pptruser pptruser \
+    && mkdir -p /home/pptruser/Downloads /app \
+    && chown -R pptruser:pptruser /home/pptruser \
+    && chown -R pptruser:pptruser /app \
+    && chown -R pptruser:pptruser /deno-dir
+
+USER pptruser
