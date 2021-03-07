@@ -38,13 +38,13 @@ export default function Home() {
 
         <div>
           My thoughts are on{' '}
-          <a href='https://twitter.com/jupegarnica'>twitter</a>
+          <a className="twitter" href='https://twitter.com/jupegarnica'>twitter</a>
         </div>
         {/* <Typist.Delay ms={400} /> */}
 
         <div>
           And some of my work at{' '}
-          <a href='https://github.com/jupegarnica'>github</a>
+          <a className="github" href='https://github.com/jupegarnica'>github</a>
         </div>
       </Typist>
       {/* <div className="TypistExample">
