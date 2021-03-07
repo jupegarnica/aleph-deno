@@ -11,6 +11,7 @@ El objetivo del proyecto es montar un entorno de desarrollo con CI/CD en Deno
 -  Git
 -  Github actions
 -  Puppeteer
+-  DigitalOcean
 
 ## Filosofía
 
