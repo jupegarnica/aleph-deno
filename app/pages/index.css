@@ -1,12 +1,78 @@
-.index {
+main {
+  background: var(--background);
+}
+section.index {
+  display: flex;
+}
+.background {
+  background: linear-gradient(135deg, #000 30%, #2f1350 100%);
+  position: absolute;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.typist {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 1;
+  position: relative;
   min-width: 80vw;
   padding: 2em;
+
+  /* transition: background-color 1s ease-in-out; */
 }
-.hand {
-  fill:indigo;
+.typist div {
+  color: var(--text-color);
+  transition: all 1000ms ease-in-out;
+}
+.typist a {
+  font-weight: 800;
 }
 
-.Cursor--blinking {
+.index a:hover {
+  /* font-size: 3em; */
+  /* transition: font-size 2000ms ease !important; */
+  /* position: absolute; */
+  color: black;
+  cursor: url(/call.svg), auto;
+}
+.index .hand:hover {
+  cursor: url(/hand.svg), auto;
+}
+.index .github:hover {
+  cursor: url(/lightbulb.svg), auto;
+}
+.hand {
+  fill: indigo;
+  fill: var(--text-color);
+}
+
+
+.animated .typist:hover + .background {
+  opacity: 1;
+  transition: all 1000ms ease;
+}
+.animated .typist div:hover {
+  --text-color: #ddd;
+  --link-active: #fc0;
+  /* --link-active: #EE000077; */
+  --background: linear-gradient(135deg, #000 30%, #2f1350 100%);
+}
+
+.animated .typist:hover :is(a, .hand) {
+  /* color: black; */
+  font-weight: bold;
+  fill: var(--link-active);
+  transition: all 600ms ease;
+}
+
+/*
+.blinking {
   opacity: 1;
   animation: blink 1s linear infinite;
 }
@@ -20,4 +86,4 @@
   100% {
     opacity: 1;
   }
-}
+} */
