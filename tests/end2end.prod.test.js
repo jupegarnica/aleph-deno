@@ -24,7 +24,7 @@ Deno.test(
 Deno.test({
   name: 'must have a working link to github',
   fn: async () => {
-    const browser = await puppeteer.launch({headless:   false});
+    const browser = await puppeteer.launch({headless: true});
     const page = await browser.newPage();
     await page.goto( baseUrl);
     await page.waitForSelector('a.github');
