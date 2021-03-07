@@ -2,15 +2,18 @@ import React from 'react';
 import Typist from 'https://esm.sh/react-typist';
 import './index.css';
 import Hand from '../components/hand.tsx';
-const getFontSize = () => {
-  const fs=window.getComputedStyle(document.querySelector('.typist'), null).getPropertyValue('font-size');
-  console.log(fs);
+function delayGenerator(mean, std, {line, lineIdx, charIdx, defDelayGenerator}) {
+  if (charIdx === line.length - 1) {
+    return 500;
+  }
+  return defDelayGenerator();
 }
+
 export default function Home() {
   return (
     <div className='page index'>
       <Typist
-        onCharacterTyped={getFontSize}
+        delayGenerator={delayGenerator}
         className='typist'
         cursor={{
           show: false,
@@ -25,19 +28,19 @@ export default function Home() {
           Hi <Hand />
         </div>
         {/* <Typist.Backspace count={4} delay={500} /> */}
-        <Typist.Delay ms={600} />
+        {/* <Typist.Delay ms={600} /> */}
 
         <div>I am a code developer</div>
-        <Typist.Delay ms={400} />
+        {/* <Typist.Delay ms={400} /> */}
 
         <div>a web artist in love with minimalism</div>
-        <Typist.Delay ms={400} />
+        {/* <Typist.Delay ms={400} /> */}
 
         <div>
           My thoughts are on{' '}
           <a href='https://twitter.com/jupegarnica'>twitter</a>
         </div>
-        <Typist.Delay ms={400} />
+        {/* <Typist.Delay ms={400} /> */}
 
         <div>
           And some of my work at{' '}
@@ -60,7 +63,7 @@ export default function Home() {
               cursor={{ hideWhenDone: true }}
             >
               * Easy to style
-              <Typist.Delay ms={1250} />
+              // <Typist.Delay ms={1250} />
               <br />
               * Easy to customize
               <Typist.Delay ms={1250} />
