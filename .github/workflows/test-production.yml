@@ -1,4 +1,4 @@
-name: Deploy
+name: Test end2end production
 
 on:
   workflow_dispatch:
