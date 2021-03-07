@@ -2,6 +2,9 @@
   min-width: 80vw;
   padding: 2em;
 }
+.hand {
+  fill:indigo;
+}
 
 .Cursor--blinking {
   opacity: 1;

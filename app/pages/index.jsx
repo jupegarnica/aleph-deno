@@ -30,10 +30,10 @@ export default function Home() {
         {/* <Typist.Backspace count={4} delay={500} /> */}
         {/* <Typist.Delay ms={600} /> */}
 
-        <div>I am a code developer</div>
+        <div>I am a code developer,</div>
         {/* <Typist.Delay ms={400} /> */}
 
-        <div>a web artist in love with minimalism</div>
+        <div>a web artist in love with minimalism.</div>
         {/* <Typist.Delay ms={400} /> */}
 
         <div>
