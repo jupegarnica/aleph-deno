@@ -1,0 +1,26 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Deploy"]
+    types:
+      - completed
+jobs:
+
+  getLatestBuild:
+
+    runs-on: ubuntu-latest
+    container:
+      image: docker.pkg.github.com/jupegarnica/aleph-deno/aleph-test:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+      # ports:
+      #   - 8080
+      volumes:
+        - /home/runner/work/aleph-deno/aleph-deno/:/app
+    steps:
+
+      - uses: actions/checkout@v2
+      - run: sh scripts/test.sh
