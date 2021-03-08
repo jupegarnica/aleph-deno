@@ -7,6 +7,10 @@ build:
 dev:
 	sh scripts/dev.sh
 
+
+run:
+	sh scripts/run.sh
+
 release:
 	sh scripts/release.sh
 
@@ -23,7 +27,8 @@ publish-test-image:
 define HELP
 build:
 	sh scripts/build.sh
-
+run:
+	sh scripts/run.sh
 dev:
 	sh scripts/dev.sh
 
