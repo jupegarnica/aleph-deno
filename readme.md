@@ -35,9 +35,9 @@ https://github.com/jupegarnica?tab=packages&repo_name=aleph-deno
 
 ### Deploy
 
-Este workflow se lanza cuando acaba de workflow build-publish.
+Este workflow se lanza cuando acaba el workflow build-publish.
 
-Consiste en 4 jobs:
+Consiste en 4 Jobs:
 
 ![](app/public/Deploy-Workflow.png)
 
