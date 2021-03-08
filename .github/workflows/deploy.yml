@@ -50,7 +50,7 @@ jobs:
             docker pull $DOCKER_IMAGE
             docker stop aleph-prod-${{needs.getLatestBuild.outputs.LATEST_BUILD_SUCCEED}} || \
             docker stop $(docker ps -a -q)
-            docker run -d -it -p 80:8080 --name aleph-prod-${{needs.getLatestBuild.outputs.LATEST_BUILD}} --restart=unless-stopped $DOCKER_IMAGE
+            docker run -d -it -p 80:8080 --name aleph-prod-${{needs.getLatestBuild.outputs.LATEST_BUILD}} --restart=always $DOCKER_IMAGE
 
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
