@@ -23,7 +23,7 @@ jobs:
 
       - name: Build image
         run: |
-          docker rmi docker.pkg.github.com/jupegarnica/aleph-deno/aleph-base:latest
+          docker rmi docker.pkg.github.com/jupegarnica/aleph-deno/aleph-base
           cd scripts
           sh build.sh
 
