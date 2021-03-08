@@ -7,8 +7,8 @@ build:
 dev:
 	sh scripts/dev.sh
 
-deploy:
-	sh scripts/deploy.sh
+release:
+	sh scripts/release.sh
 
 test:
 	sh scripts/test-in.container.sh
@@ -27,8 +27,8 @@ build:
 dev:
 	sh scripts/dev.sh
 
-deploy:
-	sh scripts/deploy.sh
+release:
+	sh scripts/release.sh
 
 test:
 	sh scripts/test-in.container.sh
