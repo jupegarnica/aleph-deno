@@ -1,0 +1,26 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+  registry_package:
+jobs:
+
+  LATEST_BUILD:
+
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v2
+      - id: setVersion
+        run: |
+          IMAGE_ID=`cat metadata/imageId`
+          echo $IMAGE_ID
+          echo "::set-output name=imageId::$IMAGE_ID"
+
+          LATEST_BUILD=`cat metadata/latestBuild`
+          echo $LATEST_BUILD
+          echo "::set-output name=latestBuild::$LATEST_BUILD"
+
+          LATEST_BUILD_SUCCEED=`cat metadata/latestBuildSucceed`
+          echo $LATEST_BUILD_SUCCEED
+          echo "::set-output name=latestBuildSucceed::$LATEST_BUILD_SUCCEED"
