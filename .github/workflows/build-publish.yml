@@ -23,6 +23,7 @@ jobs:
 
       - name: Build image
         run: |
+          docker system prune --all --force
           docker pull docker.pkg.github.com/jupegarnica/aleph-deno/aleph-base
           cd scripts
           sh build.sh
