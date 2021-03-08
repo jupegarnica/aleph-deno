@@ -1,4 +1,4 @@
-# FROM docker.pkg.github.com/jupegarnica/aleph-deno/aleph-base:latest
+# FROM docker.pkg.github.com/jupegarnica/aleph-deno/aleph-base-img:latest
 FROM hayd/alpine-deno:1.7.2
 
 WORKDIR /app
