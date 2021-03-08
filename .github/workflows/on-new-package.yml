@@ -3,6 +3,8 @@ name: new-package
 on:
   workflow_dispatch:
   package:
+  registry_package:
+    types: [updated]
 jobs:
 
   LATEST_BUILD:
