@@ -3,7 +3,7 @@ name: Deploy
 on:
   workflow_dispatch:
   registry_package:
-    types: [published]
+    types: [updated]
   # workflow_run:
   #   workflows: ["build and publish"]
   #   types:
