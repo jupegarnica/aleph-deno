@@ -8,7 +8,7 @@ on:
 
 env:
   IMAGE_NAME: aleph-prod
-  BUILD_MODE: development
+  # BUILD_MODE: development
 
 jobs:
   publish:
