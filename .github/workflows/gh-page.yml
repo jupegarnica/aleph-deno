@@ -9,18 +9,20 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: docker.pkg.github.com/jupegarnica/aleph-deno/aleph-base:latest
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+    # container:
+    #   image: docker.pkg.github.com/jupegarnica/aleph-deno/aleph-base:latest
+    #   credentials:
+    #     username: ${{ github.actor }}
+    #     password: ${{ secrets.GITHUB_TOKEN }}
       # ports:
       #   - 8080
       # volumes:
       #   - /home/runner/work/aleph-deno/aleph-deno/:/app
     steps:
+      - name: Log into registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
       - uses: actions/checkout@v2
-      - run: aleph build app
+      - run: sh scripts/SSG.sh
       - run: pwd
       - run: rm -rf docs || exit 0
       - run: mkdir docs
