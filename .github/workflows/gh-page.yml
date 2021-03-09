@@ -5,6 +5,8 @@ on:
   push:
     tags:
       - v*
+env:
+  BUILD_MODE: development
 
 jobs:
   build:
