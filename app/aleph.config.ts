@@ -6,5 +6,5 @@ export default (): Config => ({
   // plugins: [sassLoader()]
   // baseUrl: 'aleph-deno',
   // ssr:false
-  postcss: {plugins:['autoprefixer']},
+  postcss: undefined,
 })
