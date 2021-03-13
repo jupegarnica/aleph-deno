@@ -23,6 +23,8 @@ publish-base-image:
 publish-test-image:
 	sh scripts/publish-test-image.sh
 
+publish-prod-image:
+ 	GITHUB_REPOSITORY=jupegarnica/aleph-deno IMAGE_NAME=aleph-prod GITHUB_REF=refs/tags/v0.0.100 sh scripts/publish-prod-image.sh
 
 define HELP
 build:

@@ -6,8 +6,7 @@ on:
     tags:
       - v*
 
-env:
-  IMAGE_NAME: aleph-prod
+
   # BUILD_MODE: development
 
 jobs:
@@ -26,34 +25,16 @@ jobs:
         run: |
           # docker system prune --all --force
           docker pull docker.pkg.github.com/jupegarnica/aleph-deno/aleph-base
-          cd scripts
-          sh build.sh
+          sh scripts/build.sh
 
 
       - name: Push image
-        run: |
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
+        env:
+          IMAGE_NAME: aleph-prod
+          GITHUB_REF: ${{ github.ref }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: sh scripts/publish-prod-image.sh
 
-          # Change all uppercase to lowercase
-          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-
-          # Strip git ref prefix from version
-          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
-
-          # Strip "v" prefix from tag name
-          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
-
-          # Use Docker `latest` tag convention
-          # [ "$VERSION" == "master" ] && VERSION=latest
-          [ "$VERSION" == "master" ] && echo "NOT TAG FOUND, DO NOT DEPLOY" && exit 1
-
-          echo IMAGE_ID=$IMAGE_ID
-          echo VERSION=$VERSION
-          echo $VERSION > metadata/latestBuild
-          echo $IMAGE_ID > metadata/imageId
-
-          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
       - name: push latestBuild
         uses: github-actions-x/commit@v2.7
         with:
