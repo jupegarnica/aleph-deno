@@ -63,3 +63,8 @@ Este workflow monitoriza los comentarios TODO para crear, modificar o borrar iss
 ## Gh pages
 
 Por cada release crea html estático y lo copia en la carpeta `/docs` para ser servido con github pages
+
+
+# ROADMAP:
+
+- [ ] docker with cache: https://evilmartians.com/chronicles/build-images-on-github-actions-with-docker-layer-caching
