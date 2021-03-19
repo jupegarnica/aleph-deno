@@ -16,6 +16,10 @@ release:
 
 test:
 	sh scripts/test-in.container.sh
+base:
+	docker build -t aleph-base -f ./Dockerfile.base .
+	docker tag aleph-base docker.pkg.github.com/jupegarnica/aleph-deno/aleph-base:latest
+
 
 publish-base-image:
 	sh scripts/publish-base-image.sh
