@@ -79,6 +79,7 @@ jobs:
         uses: garygrossgarten/github-action-ssh@release
         with:
           command: |
+            docker stop $(docker ps -a -q)
             docker start aleph-prod-${{needs.getLatestBuild.outputs.LATEST_BUILD_SUCCEED}}
 
           host: ${{ secrets.SSH_HOST }}
