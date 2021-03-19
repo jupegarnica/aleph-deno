@@ -8,7 +8,7 @@ on:
       - completed
 jobs:
 
-  end2end:
+  test:
 
     runs-on: ubuntu-latest
     container:
@@ -22,3 +22,66 @@ jobs:
       - run: ls -al /app
       - uses: actions/checkout@v2
       - run: sh scripts/test.sh
+
+  getLatestBuild:
+
+    runs-on: ubuntu-latest
+    outputs:
+      LATEST_BUILD: ${{ steps.setVersion.outputs.latestBuild }}
+      LATEST_BUILD_SUCCEED: ${{ steps.setVersion.outputs.latestBuildSucceed }}
+      IMAGE_ID: ${{ steps.setVersion.outputs.imageId }}
+    steps:
+
+      - uses: actions/checkout@v2
+      - id: setVersion
+        run: |
+          IMAGE_ID=`cat metadata/imageId`
+          echo $IMAGE_ID
+          echo "::set-output name=imageId::$IMAGE_ID"
+
+          LATEST_BUILD=`cat metadata/latestBuild`
+          echo $LATEST_BUILD
+          echo "::set-output name=latestBuild::$LATEST_BUILD"
+
+          LATEST_BUILD_SUCCEED=`cat metadata/latestBuildSucceed`
+          echo $LATEST_BUILD_SUCCEED
+          echo "::set-output name=latestBuildSucceed::$LATEST_BUILD_SUCCEED"
+  saveLatestBuildSucceed:
+    runs-on: ubuntu-latest
+    needs: [test,getLatestBuild]
+    if: needs.test.result == 'success'
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD}} > metadata/latestBuildSucceed
+      - name: push latestBuildSucceed
+        uses: github-actions-x/commit@v2.7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          push-branch: 'master'
+          commit-message: 'add latestBuildSucceed'
+          force-add: 'true'
+          files: metadata/*
+          rebase: 'true'
+          name:  test-job
+  rollback:
+    runs-on: ubuntu-latest
+    needs: [test,getLatestBuild]
+    # continue-on-error: false
+
+    if: always() && needs.test.result == 'failure'
+
+    steps:
+      # - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD}}
+      # - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD_SUCCEED}}
+      # - run: echo ${{needs.getLatestBuild.outputs.IMAGE_ID}}
+
+      - id: rollback
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: |
+            docker start aleph-prod-${{needs.getLatestBuild.outputs.LATEST_BUILD_SUCCEED}}
+
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASS }}
+          # privateKey: ${{ secrets.SSH_KEY}}
