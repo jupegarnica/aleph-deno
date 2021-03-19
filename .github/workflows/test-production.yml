@@ -26,6 +26,8 @@ jobs:
   getLatestBuild:
 
     runs-on: ubuntu-latest
+    needs: [test]
+
     outputs:
       LATEST_BUILD: ${{ steps.setVersion.outputs.latestBuild }}
       LATEST_BUILD_SUCCEED: ${{ steps.setVersion.outputs.latestBuildSucceed }}
