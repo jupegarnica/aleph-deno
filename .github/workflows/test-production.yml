@@ -7,26 +7,9 @@ on:
     types:
       - completed
 jobs:
-
-  test:
-
-    runs-on: ubuntu-latest
-    container:
-      image: docker.pkg.github.com/jupegarnica/aleph-deno/aleph-test:latest
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-      # volumes:
-      #   - /home/runner/work/aleph-deno/aleph-deno/:/app
-    steps:
-      - run: ls -al /app
-      - uses: actions/checkout@v2
-      - run: sh scripts/test.sh
-
   getLatestBuild:
 
     runs-on: ubuntu-latest
-    needs: [test]
 
     outputs:
       LATEST_BUILD: ${{ steps.setVersion.outputs.latestBuild }}
@@ -48,6 +31,22 @@ jobs:
           LATEST_BUILD_SUCCEED=`cat metadata/latestBuildSucceed`
           echo $LATEST_BUILD_SUCCEED
           echo "::set-output name=latestBuildSucceed::$LATEST_BUILD_SUCCEED"
+
+  test:
+
+    runs-on: ubuntu-latest
+    container:
+      image: docker.pkg.github.com/jupegarnica/aleph-deno/aleph-test:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+      # volumes:
+      #   - /home/runner/work/aleph-deno/aleph-deno/:/app
+    steps:
+      - run: ls -al /app
+      - uses: actions/checkout@v2
+      - run: sh scripts/test.sh
+
   saveLatestBuildSucceed:
     runs-on: ubuntu-latest
     needs: [test,getLatestBuild]
@@ -74,7 +73,7 @@ jobs:
 
     steps:
       # - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD}}
-      # - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD_SUCCEED}}
+      - run: echo ${{needs.getLatestBuild.outputs.LATEST_BUILD_SUCCEED}}
       # - run: echo ${{needs.getLatestBuild.outputs.IMAGE_ID}}
 
       - id: rollback
