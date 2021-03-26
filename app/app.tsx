@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react';
 import React from 'react';
-import './style/main.css';
+// import './style/main.css';
 // import { useDeno } from 'aleph/mod.ts';
 
 export default function App({
