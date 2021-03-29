@@ -2,4 +2,5 @@
 DIR=$(dirname $(realpath "$0"))
 
 cd $DIR/../app
-aleph dev
+# aleph dev
+docker-compose up --build

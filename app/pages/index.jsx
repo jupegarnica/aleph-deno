@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Typist from 'https://esm.sh/react-typist';
-// import './index.css';
+import './index.css';
 import Hand from '../components/hand.tsx';
 function delayGenerator(mean, std, {line, lineIdx, charIdx, defDelayGenerator}) {
   if (charIdx === line.length - 1) {
@@ -25,7 +25,6 @@ export default function Home() {
         <div>
           Hi <Hand />
         </div>
-        <div>I love devops</div>
         <div>I am a code developer,</div>
 
         <div>a web artist in love with minimalism.</div>
